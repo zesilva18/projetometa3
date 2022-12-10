@@ -684,7 +684,7 @@ void printTable()
 			}
 			else
 			{
-				printf("%s\t(%s)\t%s\n", tmp_line->name, tmp_line->paramTypes, tmp_linety->type);
+				printf("%s\t(%s)\t%s\n", tmp_line->name, tmp_line->paramTypes, tmp_line->type);
 			}
 
 			tmp_line = tmp_line->brother;
