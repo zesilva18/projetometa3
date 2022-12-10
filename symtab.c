@@ -369,7 +369,6 @@ bool verifyMethod(char *name, char *paramTypes)
 char *checkSymbol(ast_tree *node, symtab_line *method)
 {
 
-	// char* name = node->name;
 	char *param = node->value;
 	int line = node->line;
 	int col = node->collum;

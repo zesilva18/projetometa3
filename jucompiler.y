@@ -162,7 +162,7 @@ FieldDecl: PUBLIC STATIC Type ID HelpField SEMICOLON     {
                                                                 add_brother($$, $5);
                                                                 
                                                             }
-        | error SEMICOLON                                    {$$ = NULL;flag_erro = 1;}
+        | error SEMICOLON                                    {$$ = NULL;flag_erro = 1; flag_erro2 = 1;}
         ;
 
 
@@ -233,7 +233,7 @@ Statement:    LBRACE Statement StatementAux RBRACE        {
                                                                 }
                                                                 aux = $3;
                                                                 while(aux != NULL){
-                                                                    if(aux->type != NULL && strcmp(aux->type,"SEMICOLON")!=0){
+                                                                    if(aux->type != NULL && strcmp(aux->type,"Semicolon")!=0){
                                                                         count++;
                                                                     }
 
@@ -260,7 +260,7 @@ Statement:    LBRACE Statement StatementAux RBRACE        {
                                                                                add_childs($$,$3);
 
 
-                                                                               if($5 == NULL || strcmp($5->type, "SEMICOLON") == 0){
+                                                                               if($5 == NULL || strcmp($5->type, "Semicolon") == 0){
                                                                                     add_childs($$,ast_node("Block","",0,0));
                                                                                     add_childs($$,ast_node("Block","",0,0));
                                                                                }else{
@@ -272,12 +272,12 @@ Statement:    LBRACE Statement StatementAux RBRACE        {
             | IF LPAR Expr RPAR Statement ELSE Statement                    {
                                                                                 $$ = ast_node("If","",$1->line,$1->collum);
                                                                                 add_childs($$,$3);
-                                                                                if($5 == NULL || strcmp($5->type,"SEMICOLON") == 0){  
+                                                                                if($5 == NULL || strcmp($5->type,"Semicolon") == 0){  
                                                                                     add_childs($$,ast_node("Block","",0,0));}
                                                                                 else{
                                                                                     add_childs($$,$5);
                                                                                     }
-                                                                                if($7 == NULL|| strcmp($7->type,"SEMICOLON") == 0){ 
+                                                                                if($7 == NULL|| strcmp($7->type,"Semicolon") == 0){ 
                                                                                     add_childs($$,ast_node("Block","",0,0));}
                                                                                 else{
                                                                                     add_childs($$,$7);
@@ -336,10 +336,11 @@ MethodInvocation: ID LPAR ShiftReduce RPAR                             {$$ = ast
                 | ID LPAR RPAR                                                {$$ = ast_node("Call", "",$1->line, $1->collum);
                                                                                 add_childs($$, ast_node("Id", $1->name,$1->line,$1->collum));}
 
-                | ID LPAR error RPAR                                                {$$ = NULL;flag_erro = 1;}                            
+                | ID LPAR error RPAR                                                {$$ = NULL;flag_erro = 1; flag_erro2 = 1;}                            
                 ;
 
 ShiftReduce: Expr MethodInvocationaux			     {$$ = $1;add_brother($$,$2);}
+    
 
 MethodInvocationaux: COMMA Expr MethodInvocationaux                                 {$$ = $2;add_brother($$, $3);}  
 
@@ -349,7 +350,7 @@ MethodInvocationaux: COMMA Expr MethodInvocationaux                             
 ParseArgs: PARSEINT LPAR ID LSQ Expr RSQ RPAR                                       {$$ = ast_node("ParseArgs","",$1->line,$1->collum);
                                                                                     add_childs($$, ast_node("Id", $3->name,$3->line,$3->collum));add_childs($$, $5);}
 
-        | PARSEINT LPAR error RPAR                                                  {$$ = NULL;flag_erro = 1;}
+        | PARSEINT LPAR error RPAR                                                  {$$ = NULL;flag_erro = 1; flag_erro2 = 1;}
         ;
 
 
@@ -384,7 +385,7 @@ ExprAux: ExprAux PLUS ExprAux                                                   
     | BOOLLIT                                                                       {$$ = ast_node("BoolLit",$1->name,$1->line,$1->collum);}
     | MethodInvocation                                                              {$$ = $1;}
     | ParseArgs                                                                     {$$ = $1;}
-    | LPAR error RPAR                                                               {$$ = NULL;flag_erro = 1;}
+    | LPAR error RPAR                                                               {$$ = NULL;flag_erro = 1; flag_erro2 = 1;}
     ;
 
 %%

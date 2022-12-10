@@ -178,9 +178,22 @@ void recursiveMethod(ast_tree *node, symtab_line *method, bool isCall)
 		{
 			node->type2 = "none";
 		}
+		if (node->brother != NULL)
+		{
+			recursiveMethod(node->brother, method, isCall);
+		}
 
+		if(strcmp(node->type2, "none") == 0)
+		{
+			node->son->type2 = "none";
+			node->son->brother->type2 = "none";
+		}
+			
 		return;
 	}
+
+
+
 	else if (strcmp(type, "Assign") == 0)
 	{
 
