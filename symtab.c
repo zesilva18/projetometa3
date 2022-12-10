@@ -122,7 +122,7 @@ void createGlobalVariable(ast_tree *node)
 		return;
 	}
 
-	if (verifyGlobalVariable(name))
+	if (verifyGlobalVariable(name))  //verificar se a name e paramTypes existem
 	{
 
 		symtab_line *line = (symtab_line *)malloc(sizeof(symtab_line));
@@ -153,7 +153,7 @@ void createGlobalVariable(ast_tree *node)
 	else
 	{
 
-		printf("Line %d, col %d: Symbol %s already defined\n", line, col, name);
+		printf("Line %d, col %d: Symbol %s already defined\n", line, col, name); 
 	}
 }
 
@@ -162,9 +162,10 @@ void addParametros(ast_tree *node, symtab_line *line)
 
 	char *name;
 	char *type;
-	int numLine, col;
+	int linesave;
+	int col;
 
-	//---------- ADICIONAR PARAMETROS DA FUNCAO---------
+	//adicionar parametros a um no 
 
 	ast_tree *tmp = node->son->son->brother->brother->son;
 
@@ -180,12 +181,12 @@ void addParametros(ast_tree *node, symtab_line *line)
 
 		name = tmp->son->brother->value;
 		type = convertType(tmp->son->type);
-		numLine = tmp->son->brother->line;
+		linesave = tmp->son->brother->line;
 		col = tmp->son->brother->collum;
 
 		if (strcmp(name, "_") == 0)
 		{
-			printf("Line %d, col %d: Symbol _ is reserved\n", numLine, col);
+			printf("Line %d, col %d: Symbol _ is reserved\n", linesave, col);
 		}
 		else
 		{
@@ -205,7 +206,7 @@ void addParametros(ast_tree *node, symtab_line *line)
 			else
 			{
 
-				printf("Line %d, col %d: Symbol %s already defined\n", numLine, col, name);
+				printf("Line %d, col %d: Symbol %s already defined\n", linesave, col, name);
 			}
 		}
 
@@ -218,12 +219,12 @@ void addLocalVariable(ast_tree *node, symtab_line *line)
 
 	char *name = node->son->brother->value;
 	char *type = convertType(node->son->type);
-	int numLine = node->son->brother->line;
+	int linesave = node->son->brother->line;
 	int col = node->son->brother->collum;
 
 	if (strcmp(name, "_") == 0)
 	{
-		printf("Line %d, col %d: Symbol _ is reserved\n", numLine, col);
+		printf("Line %d, col %d: Symbol _ is reserved\n", linesave, col);
 		return;
 	}
 
@@ -252,7 +253,7 @@ void addLocalVariable(ast_tree *node, symtab_line *line)
 	else
 	{
 
-		printf("Line %d, col %d: Symbol %s already defined\n", numLine, col, name);
+		printf("Line %d, col %d: Symbol %s already defined\n", linesave, col, name);
 	}
 }
 
@@ -285,7 +286,7 @@ char *getParamTypes(ast_tree *params)
 	return string;
 }
 
-char *convertType(char *type)
+char *convertType(char *type) //funcao para converter o tipo 
 {
 
 	if (strcmp(type, "StringArray") == 0)
@@ -303,14 +304,14 @@ char *convertType(char *type)
 		int i = 0;
 		for (; *tmp; ++tmp)
 		{
-			string[i] = tolower(*tmp);
+			string[i] = tolower(*tmp); 
 			i++;
 		}
 		return string;
 	}
 }
 
-bool verifyGlobalVariable(char *name)
+bool verifyGlobalVariable(char *name) //
 {
 
 	symtab_line *tmp = symtab->son;
@@ -365,25 +366,6 @@ bool verifyMethod(char *name, char *paramTypes)
 	return true;
 }
 
-char *checkMethod(char *name, char *paramTypes)
-{
-
-	symtab_header *tmp = symtab;
-
-	while (tmp != NULL)
-	{
-
-		if (strcmp(tmp->name, name) == 0 && tmp->params != NULL && strcmp(tmp->params, paramTypes) == 0)
-		{
-			return tmp->son->paramTypes;
-		}
-
-		tmp = tmp->brother;
-	}
-
-	return "olaalalla";
-}
-
 char *checkSymbol(ast_tree *node, symtab_line *method)
 {
 
@@ -392,7 +374,7 @@ char *checkSymbol(ast_tree *node, symtab_line *method)
 	int line = node->line;
 	int col = node->collum;
 
-	//--------PRIMEIRO VERIFICAR VARIAVEIS LOCAIS DO METODO---------
+	//Verificar as variaveis locais do metodo
 
 	symtab_line *tmp = method->brother;
 
@@ -467,7 +449,6 @@ void checkMethodParams(ast_tree *node, char *params_call)
 
 	symtab_line *tmp = symtab->son;
 
-	//------- ENCONTRAR A FUNCAO MAIS CORRETA ---------
 	while (tmp != NULL && checkFunc < 2)
 	{
 
@@ -475,8 +456,6 @@ void checkMethodParams(ast_tree *node, char *params_call)
 
 		if (params_method != NULL && strcmp(tmp->name, name) == 0 && strcmp(tmp->paramTypes, params_call) == 0)
 		{
-
-			// node->type = tmp->type;
 
 			checkFunc++;
 
@@ -492,8 +471,7 @@ void checkMethodParams(ast_tree *node, char *params_call)
 
 	tmp = symtab->son;
 
-	//----------  CASO PARTICULAR DE INT/DOUBLE ----------
-	if (checkFunc == 0)
+	if (checkFunc == 0)  //casos para int e double
 	{
 		while (tmp != NULL && checkFunc < 2)
 		{
@@ -553,16 +531,13 @@ void checkMethodParams(ast_tree *node, char *params_call)
 
 				if (check && token_method == NULL)
 				{
-					// node->type = tmp->type;
 
 					checkFunc++;
-
 					final_params = (char *)malloc(strlen(params_call) + 1);
 					strcpy(final_params, params);
 
 					final_type = (char *)malloc(strlen(tmp->type) + 1);
 					strcpy(final_type, tmp->type);
-					// return params;
 				}
 			}
 
@@ -678,12 +653,10 @@ char *scat(char *s, char *t)
 	return p;
 }
 
-void printSymbolTable()
+void printTable()
 {
 
 	symtab_header *tmp = symtab;
-
-	// printf("aaa\n");
 
 	while (tmp != NULL)
 	{
