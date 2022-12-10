@@ -193,7 +193,6 @@ void recursiveMethod(ast_tree *node, symtab_line *method, bool isCall)
 	}
 
 
-
 	else if (strcmp(type, "Assign") == 0)
 	{
 
@@ -289,9 +288,29 @@ void recursiveMethod(ast_tree *node, symtab_line *method, bool isCall)
 	else if (logic || comparation)
 	{
 		node->type2 = "boolean";
+		int validar = 0;
 
 		if (node->son->brother != NULL)
 		{
+			if(node == NULL) validar = 1;
+			if (strcmp(node->type, "Xor") != 0) validar = 1; 
+			if (node->son->type2 != NULL && validar == 0){
+				if (strchr(node->son->value, '.') != NULL)
+        	{
+            	// É double
+            	node->type2 = "undef";
+            	printf("Line %d, col %d: Operator %s cannot be applied to types %s, %s\n", node->line, node->collum, getToken(node->type), node->son->type2, node->son->brother->type2);
+        	}
+        	else
+        	{
+            // Verificar se é int
+            	if (strcmp(node->son->type2, "int") == 0 && strcmp(node->son->brother->type2, "int") == 0)
+            	{
+                	node->type2 = "int";
+            	}
+        	}
+			}
+				
 			if (strcmp(node->son->type2, node->son->brother->type2) != 0 || (strcmp(node->son->type2, "undef") == 0) || (strcmp(node->son->brother->type2, "undef") == 0) || (strcmp(node->son->type2, "String[]") == 0) || (strcmp(node->son->brother->type2, "String[]") == 0))
 			{
 				if (!((strcmp(node->son->type2, "int") == 0 && strcmp(node->son->brother->type2, "double") == 0) || (strcmp(node->son->type2, "double") == 0 && strcmp(node->son->brother->type2, "int") == 0)))
