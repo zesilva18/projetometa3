@@ -974,6 +974,7 @@ André Magalhães de Carvalho Nº 2020237655
     int error;
     extern int flag_erro;
     extern int flag_erro2;
+    int a;
 
     symtab_header* symtab;
 
@@ -989,9 +990,9 @@ André Magalhães de Carvalho Nº 2020237655
         return tmp;
 
     }
-#line 993 "lex.yy.c"
+#line 994 "lex.yy.c"
 
-#line 995 "lex.yy.c"
+#line 996 "lex.yy.c"
 
 #define INITIAL 0
 #define COMENTARIOS 1
@@ -1213,10 +1214,10 @@ YY_DECL
 		}
 
 	{
-#line 53 "jucompiler.l"
+#line 54 "jucompiler.l"
 
 
-#line 1220 "lex.yy.c"
+#line 1221 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1275,401 +1276,401 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 55 "jucompiler.l"
+#line 56 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("AND\n");}else if (flag==2) {return(RESERVED);};}   
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 57 "jucompiler.l"
+#line 58 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("BOOLLIT(%s)\n",yytext);}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);return(BOOLLIT);}}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 59 "jucompiler.l"
+#line 60 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("AND\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("And"), line, collum - (int) yyleng); return(AND);}}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 61 "jucompiler.l"
+#line 62 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("ASSIGN\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Assign"), line, collum - (int) yyleng);return(ASSIGN);}}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 63 "jucompiler.l"
+#line 64 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("STAR\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Mul"), line, collum - (int) yyleng);  return(STAR);}} 
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 65 "jucompiler.l"
+#line 66 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("COMMA\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(COMMA);}}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 67 "jucompiler.l"
+#line 68 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("DIV\n");} else if (flag==2) {yylval.lex = createStruct((char*)strdup("Div"), line, collum - (int) yyleng);  return(DIV);}}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 69 "jucompiler.l"
+#line 70 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("EQ\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Eq"), line, collum - (int) yyleng); return(EQ);}}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 71 "jucompiler.l"
+#line 72 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("GE\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Ge"), line, collum - (int) yyleng);return(GE);}}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 73 "jucompiler.l"
+#line 74 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("GT\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Gt"), line, collum - (int) yyleng); return(GT);}}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 75 "jucompiler.l"
+#line 76 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LBRACE\n");} else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(LBRACE);} }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 77 "jucompiler.l"
+#line 78 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LE\n");} else if (flag==2) {yylval.lex = createStruct((char*)strdup("Le"), line, collum - (int) yyleng); return(LE);}}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 79 "jucompiler.l"
+#line 80 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LPAR\n");} else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(LPAR);}}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 81 "jucompiler.l"
+#line 82 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LSQ\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(LSQ);}}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 83 "jucompiler.l"
+#line 84 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LT\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Lt"), line, collum - (int) yyleng); return(LT);}}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 85 "jucompiler.l"
+#line 86 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("MINUS\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Sub"), line, collum - (int) yyleng);return(MINUS);}}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 87 "jucompiler.l"
+#line 88 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("MOD\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Mod"), line, collum - (int) yyleng);return(MOD);}}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 89 "jucompiler.l"
+#line 90 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("NE\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Ne"), line, collum - (int) yyleng); return(NE);}}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 91 "jucompiler.l"
+#line 92 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("NOT\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Not"), line, collum - (int) yyleng);return(NOT);}}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 93 "jucompiler.l"
+#line 94 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("OR\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Or"), line, collum - (int) yyleng);return(OR);}}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 95 "jucompiler.l"
+#line 96 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("PLUS\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Add"), line, collum - (int) yyleng);return(PLUS);}}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 97 "jucompiler.l"
+#line 98 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("RBRACE\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(RBRACE);}}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 99 "jucompiler.l"
+#line 100 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("RPAR\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(RPAR);}}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 101 "jucompiler.l"
+#line 102 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("RSQ\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(RSQ);}}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 103 "jucompiler.l"
+#line 104 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("SEMICOLON\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(SEMICOLON);}}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 105 "jucompiler.l"
+#line 106 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("ARROW\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(ARROW);}}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 107 "jucompiler.l"
+#line 108 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("LSHIFT\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Lshift"), line, collum - (int) yyleng); return(LSHIFT);}}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 109 "jucompiler.l"
+#line 110 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("RSHIFT\n");}else if (flag==2) {yylval.lex = createStruct((char*)strdup("Rshift"), line, collum - (int) yyleng); return(RSHIFT);}}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 111 "jucompiler.l"
+#line 112 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("XOR\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Xor"), line, collum - (int) yyleng); return(XOR);}}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 113 "jucompiler.l"
+#line 114 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("BOOL\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Bool"), line, collum - (int) yyleng); return(BOOL);}}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 115 "jucompiler.l"
+#line 116 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("CLASS\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);  return(CLASS);}}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 117 "jucompiler.l"
+#line 118 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("DOTLENGTH\n"); }else if (flag==2) {yylval.lex = createStruct("Lenght", line, collum - (int) yyleng); return(DOTLENGTH);}}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 119 "jucompiler.l"
+#line 120 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("DOUBLE\n"); }else if (flag==2) {yylval.lex = createStruct("Double", line, collum - (int) yyleng); return(DOUBLE);}}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 121 "jucompiler.l"
+#line 122 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("ELSE\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(ELSE);}}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 123 "jucompiler.l"
+#line 124 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("IF\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);return(IF);}}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 125 "jucompiler.l"
+#line 126 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("INT\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup("Int"), line, collum - (int) yyleng); return(INT);}}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 127 "jucompiler.l"
+#line 128 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("PRINT\n");}else if (flag==2) {yylval.lex = createStruct("Print", line, collum - (int) yyleng); return(PRINT);}}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 129 "jucompiler.l"
+#line 130 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("PARSEINT\n");}else if (flag==2) {yylval.lex = createStruct("ParseArgs", line, collum - (int) yyleng); return(PARSEINT);}}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 131 "jucompiler.l"
+#line 132 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("PUBLIC\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(PUBLIC);}}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 133 "jucompiler.l"
+#line 134 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("RETURN\n"); }else if (flag==2) {yylval.lex = createStruct("Return", line, collum - (int) yyleng); return(RETURN);}}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 135 "jucompiler.l"
+#line 136 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("STATIC\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(STATIC);}}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 137 "jucompiler.l"
+#line 138 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("STRING\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(STRING);}}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 139 "jucompiler.l"
+#line 140 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("VOID\n");  }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(VOID);}}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 141 "jucompiler.l"
+#line 142 "jucompiler.l"
 {collum += yyleng;if (flag==1){printf("WHILE\n"); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(WHILE);}}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 144 "jucompiler.l"
+#line 145 "jucompiler.l"
 {BEGIN SL_COMMENT;collum = 1;line++;}
 	YY_BREAK
 case 46:
 /* rule 46 can match eol */
 YY_RULE_SETUP
-#line 145 "jucompiler.l"
+#line 146 "jucompiler.l"
 {BEGIN 0;} 
 	YY_BREAK
 case YY_STATE_EOF(SL_COMMENT):
-#line 146 "jucompiler.l"
+#line 147 "jucompiler.l"
 {BEGIN 0;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 147 "jucompiler.l"
+#line 148 "jucompiler.l"
 ;   
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 149 "jucompiler.l"
+#line 150 "jucompiler.l"
 {nova_linha = line;nova_coluna=collum; nova_linha2 = 0;collum += 2;BEGIN(COMENTARIOS);}
 	YY_BREAK
 case YY_STATE_EOF(COMENTARIOS):
-#line 150 "jucompiler.l"
+#line 151 "jucompiler.l"
 {line += nova_linha2; printf("Line %d, col %d: unterminated comment\n", nova_linha, nova_coluna); BEGIN(0); collum += yyleng; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 151 "jucompiler.l"
+#line 152 "jucompiler.l"
 {line += nova_linha2; collum+=2; BEGIN(0);}
 	YY_BREAK
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 152 "jucompiler.l"
+#line 153 "jucompiler.l"
 {nova_linha2++;collum = 1;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 153 "jucompiler.l"
+#line 154 "jucompiler.l"
 {collum += yyleng;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 157 "jucompiler.l"
+#line 158 "jucompiler.l"
 {nova_coluna = collum; collum += 1; nova_linha=line; BEGIN STRINGS; buffer[0] = '\0'; error = 0;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 158 "jucompiler.l"
+#line 159 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 159 "jucompiler.l"
+#line 160 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 160 "jucompiler.l"
+#line 161 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 161 "jucompiler.l"
+#line 162 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 162 "jucompiler.l"
+#line 163 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 163 "jucompiler.l"
+#line 164 "jucompiler.l"
 {collum+=yyleng; strcat(buffer, yytext);}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 164 "jucompiler.l"
+#line 165 "jucompiler.l"
 {collum+=yyleng; BEGIN 0; if (error!=1){if(flag==1){printf("STRLIT(\"%s\")\n", buffer);}else if (flag==2) {strlit[0] = '\"'; strcat(strlit, buffer); strcat(strlit, "\""); yylval.lex = createStruct((char*)strdup(strlit), line, collum - (int) yyleng);  bzero(strlit,sizeof(strlit)); return(STRLIT);}}}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 165 "jucompiler.l"
+#line 166 "jucompiler.l"
 {error=1; if (yytext[1] != '\r') {printf("Line %d, col %d: invalid escape sequence (%s)\n", line, collum, yytext); collum+=yyleng;} else {printf("Line %d, col %d: invalid escape sequence (\\)\n", line, collum - (int) yyleng); collum+=yyleng;}}
 	YY_BREAK
 case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
-#line 166 "jucompiler.l"
+#line 167 "jucompiler.l"
 {error=1; printf("Line %d, col %d: unterminated string literal\n", nova_linha, nova_coluna); line++; collum=1; nova_coluna=0; buffer[0] = '\0'; BEGIN 0;}
 	YY_BREAK
 case YY_STATE_EOF(STRINGS):
-#line 167 "jucompiler.l"
+#line 168 "jucompiler.l"
 {error=1; printf("Line %d, col %d: unterminated string literal\n", nova_linha, nova_coluna); line++; collum=1; nova_coluna=0; buffer[0] = '\0'; BEGIN 0;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 170 "jucompiler.l"
+#line 171 "jucompiler.l"
 {collum += yyleng; if (flag==1){ printf("INTLIT(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);  return(INTLIT);}}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 172 "jucompiler.l"
+#line 173 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);  return(REALLIT);}}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 173 "jucompiler.l"
+#line 174 "jucompiler.l"
 
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 174 "jucompiler.l"
+#line 175 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(REALLIT);}}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 176 "jucompiler.l"
+#line 177 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(REALLIT);}} //numeros com exponencias
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 178 "jucompiler.l"
+#line 179 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext);}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(REALLIT);}}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 180 "jucompiler.l"
+#line 181 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext);}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(REALLIT);}}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 182 "jucompiler.l"
+#line 183 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("REALLIT(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(REALLIT);}}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 184 "jucompiler.l"
+#line 185 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("ID(%s)\n", yytext); }else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng);  return(ID);}}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 186 "jucompiler.l"
+#line 187 "jucompiler.l"
 {collum += yyleng; if (flag==1){printf("INTLIT(%s)\n", yytext);}else if (flag==2) {yylval.lex = createStruct((char*)strdup(yytext), line, collum - (int) yyleng); return(INTLIT);}}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 189 "jucompiler.l"
+#line 190 "jucompiler.l"
 {collum += yyleng;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 190 "jucompiler.l"
+#line 191 "jucompiler.l"
 {collum += yyleng;}
 	YY_BREAK
 case 74:
 /* rule 74 can match eol */
 YY_RULE_SETUP
-#line 191 "jucompiler.l"
+#line 192 "jucompiler.l"
 {line++; collum = 1;}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 192 "jucompiler.l"
+#line 193 "jucompiler.l"
 {printf("Line %d, col %d: illegal character (%s)\n",line,collum, yytext);collum += yyleng;}
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 195 "jucompiler.l"
+#line 196 "jucompiler.l"
 ECHO;
 	YY_BREAK
-#line 1673 "lex.yy.c"
+#line 1674 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(ERRORSTRLIT):
 case YY_STATE_EOF(ERRORESC):
@@ -2676,7 +2677,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 195 "jucompiler.l"
+#line 196 "jucompiler.l"
 
 
 void yyerror(char *s) {

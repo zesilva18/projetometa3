@@ -27,6 +27,7 @@ André Magalhães de Carvalho Nº 2020237655
     int error;
     extern int flag_erro;
     extern int flag_erro2;
+    int a;
 
     symtab_header* symtab;
 
