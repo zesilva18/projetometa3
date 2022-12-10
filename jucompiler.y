@@ -1,6 +1,6 @@
 /*
-    Made By:
-        José Pedro Ferreira Dinis e Silva nº 2020237724
+José Pedro Ferreira Dinis e Silva Nº 2020237724
+André Magalhães de Carvalho Nº 2020237655
 
 */
 
