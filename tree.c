@@ -2,9 +2,9 @@
 
 
 
-ast_tree *ast_node(char *token, char* value, int line, int collum) { //criar arvore
+ast_tree *ast_node(char *type, char* value, int line, int collum) { //criar arvore
     ast_tree *node = (ast_tree *)malloc(sizeof(ast_tree));
-    node->type = token;
+    node->type = type;
     node->value = value;
     node->line = line;
     node->collum = collum;
@@ -84,19 +84,3 @@ void ast_print(ast_tree* ast,int level)
     }
 }
 
-int nrChilds (ast_tree* ast){
-    int i=0;
-    ast_tree* root = ast;
-
-    if(root->son==NULL || root ==NULL){
-        return 0;
-    }
-    else{
-        i++;
-        while (root->brother != NULL) {
-            i++;
-            root = root->brother;
-        }
-        return i;
-    }
-}

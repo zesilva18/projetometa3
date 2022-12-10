@@ -27,7 +27,7 @@ André Magalhães de Carvalho Nº 2020237655
     extern int flag_erro;
     extern int flag_erro2;
 
-    symtab_header* symtab;
+    symbab_tab* symtab;
 
 
     info_lex* createStruct(char* name, int line, int collum){

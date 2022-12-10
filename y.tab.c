@@ -74,7 +74,7 @@
 #include "y.tab.h"
 #include "semantics.h"
 
-symtab_header* symtab;
+symbab_tab* symtab;
 
 struct ast_tree *raiz;
 struct ast_tree *aux;
@@ -644,15 +644,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    86,    86,    94,    98,   104,   107,   111,   119,   128,
-     139,   145,   153,   154,   157,   165,   169,   176,   179,   180,
-     181,   184,   189,   195,   199,   205,   209,   220,   226,   229,
-     253,   256,   272,   287,   301,   307,   309,   313,   317,   321,
-     324,   325,   326,   329,   330,   333,   336,   339,   342,   345,
-     347,   350,   353,   357,   358,   361,   362,   363,   364,   365,
-     366,   367,   368,   369,   370,   371,   372,   373,   374,   375,
-     376,   377,   378,   379,   380,   381,   382,   383,   384,   385,
-     386,   387,   388
+       0,    85,    85,    93,    97,   103,   106,   110,   118,   127,
+     138,   144,   152,   153,   156,   164,   168,   175,   178,   179,
+     180,   183,   188,   194,   198,   204,   208,   219,   225,   228,
+     252,   255,   271,   286,   300,   306,   308,   312,   316,   320,
+     323,   324,   325,   328,   329,   332,   335,   338,   341,   344,
+     346,   349,   352,   356,   357,   360,   361,   362,   363,   364,
+     365,   366,   367,   368,   369,   370,   371,   372,   373,   374,
+     375,   376,   377,   378,   379,   380,   381,   382,   383,   384,
+     385,   386,   387
 };
 #endif
 
@@ -1600,7 +1600,7 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 86 "jucompiler.y"
+#line 85 "jucompiler.y"
                                                             {
                                                                 (yyval.ast_tree) = ast_node("Program","",0,0);       
                                                                 add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-3].lex)->name,(yyvsp[-3].lex)->line,(yyvsp[-3].lex)->collum));
@@ -1611,7 +1611,7 @@ yyreduce:
     break;
 
   case 3:
-#line 94 "jucompiler.y"
+#line 93 "jucompiler.y"
                                                              {
                                                                 (yyval.ast_tree) = (yyvsp[-1].ast_tree);
                                                                 add_brother((yyval.ast_tree), (yyvsp[0].ast_tree));
@@ -1620,7 +1620,7 @@ yyreduce:
     break;
 
   case 4:
-#line 98 "jucompiler.y"
+#line 97 "jucompiler.y"
                                                              {                                                           
                                                                 (yyval.ast_tree) = (yyvsp[-1].ast_tree);
                                                                 
@@ -1631,7 +1631,7 @@ yyreduce:
     break;
 
   case 5:
-#line 104 "jucompiler.y"
+#line 103 "jucompiler.y"
                                                              {
                                                                 (yyval.ast_tree) = (yyvsp[0].ast_tree);
                                                             }
@@ -1639,13 +1639,13 @@ yyreduce:
     break;
 
   case 6:
-#line 107 "jucompiler.y"
+#line 106 "jucompiler.y"
                                                             {(yyval.ast_tree)=NULL;}
 #line 1645 "y.tab.c"
     break;
 
   case 7:
-#line 111 "jucompiler.y"
+#line 110 "jucompiler.y"
                                                                                     {
                                                                                     (yyval.ast_tree) = ast_node("MethodDecl","",0,0);
                                                                                     add_childs((yyval.ast_tree),(yyvsp[-1].ast_tree));
@@ -1655,7 +1655,7 @@ yyreduce:
     break;
 
   case 8:
-#line 119 "jucompiler.y"
+#line 118 "jucompiler.y"
                                                                {
                                                                 (yyval.ast_tree) = ast_node("MethodHeader","",0,0);
                                                                 aux = ast_node("MethodParams","",0,0);
@@ -1668,7 +1668,7 @@ yyreduce:
     break;
 
   case 9:
-#line 128 "jucompiler.y"
+#line 127 "jucompiler.y"
                                                                {
                                                                 (yyval.ast_tree) = ast_node("MethodHeader","",0,0);
                                                                 aux = ast_node("MethodParams","",0,0);
@@ -1681,7 +1681,7 @@ yyreduce:
     break;
 
   case 10:
-#line 139 "jucompiler.y"
+#line 138 "jucompiler.y"
                                                                                  {(yyval.ast_tree) = ast_node("MethodBody","",0,0); 
                                                                                     add_childs((yyval.ast_tree),(yyvsp[-1].ast_tree));
                                                                                     }
@@ -1689,7 +1689,7 @@ yyreduce:
     break;
 
   case 11:
-#line 145 "jucompiler.y"
+#line 144 "jucompiler.y"
                                                                               {if((yyvsp[-1].ast_tree)!=NULL){
                                                                                     (yyval.ast_tree) = (yyvsp[-1].ast_tree);
                                                                                     add_brother((yyval.ast_tree), (yyvsp[0].ast_tree));
@@ -1702,19 +1702,19 @@ yyreduce:
     break;
 
   case 12:
-#line 153 "jucompiler.y"
+#line 152 "jucompiler.y"
                                                                                  {(yyval.ast_tree) = (yyvsp[-1].ast_tree); add_brother((yyval.ast_tree), (yyvsp[0].ast_tree));}
 #line 1708 "y.tab.c"
     break;
 
   case 13:
-#line 154 "jucompiler.y"
+#line 153 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;}
 #line 1714 "y.tab.c"
     break;
 
   case 14:
-#line 157 "jucompiler.y"
+#line 156 "jucompiler.y"
                                                          {
                                                                 (yyval.ast_tree) = ast_node("FieldDecl", "",0,0);
                                                                 add_childs((yyval.ast_tree),(yyvsp[-3].ast_tree));
@@ -1727,13 +1727,13 @@ yyreduce:
     break;
 
   case 15:
-#line 165 "jucompiler.y"
+#line 164 "jucompiler.y"
                                                              {(yyval.ast_tree) = NULL;flag_erro = 1; flag_erro2 = 1;}
 #line 1733 "y.tab.c"
     break;
 
   case 16:
-#line 169 "jucompiler.y"
+#line 168 "jucompiler.y"
                                                       {
                                                                 (yyval.ast_tree) = ast_node("FieldDecl","",0,0);                                                                
                                                                 add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-1].lex)->name,(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum));
@@ -1744,31 +1744,31 @@ yyreduce:
     break;
 
   case 17:
-#line 176 "jucompiler.y"
+#line 175 "jucompiler.y"
                                                            {(yyval.ast_tree) = NULL; }
 #line 1750 "y.tab.c"
     break;
 
   case 18:
-#line 179 "jucompiler.y"
+#line 178 "jucompiler.y"
                                                             {(yyval.ast_tree) = ast_node((yyvsp[0].lex)->name,"",(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 1756 "y.tab.c"
     break;
 
   case 19:
-#line 180 "jucompiler.y"
+#line 179 "jucompiler.y"
                                                             {(yyval.ast_tree) = ast_node((yyvsp[0].lex)->name,"",(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 1762 "y.tab.c"
     break;
 
   case 20:
-#line 181 "jucompiler.y"
+#line 180 "jucompiler.y"
                                                             {(yyval.ast_tree) = ast_node((yyvsp[0].lex)->name,"",(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 1768 "y.tab.c"
     break;
 
   case 21:
-#line 184 "jucompiler.y"
+#line 183 "jucompiler.y"
                                                                            {(yyval.ast_tree) = ast_node("ParamDecl","",0,0);
                                                                             add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));
                                                                             add_childs((yyval.ast_tree),ast_node("Id", (yyvsp[-1].lex)->name,(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum));
@@ -1777,7 +1777,7 @@ yyreduce:
     break;
 
   case 22:
-#line 189 "jucompiler.y"
+#line 188 "jucompiler.y"
                                                                            {
                                                                            (yyval.ast_tree) = ast_node("ParamDecl","",0,0);
                                                                            add_childs((yyval.ast_tree),ast_node("StringArray","",(yyvsp[-3].lex)->line,(yyvsp[-3].lex)->collum));
@@ -1787,13 +1787,13 @@ yyreduce:
     break;
 
   case 23:
-#line 195 "jucompiler.y"
+#line 194 "jucompiler.y"
                                                                             {(yyval.ast_tree) = NULL;}
 #line 1793 "y.tab.c"
     break;
 
   case 24:
-#line 199 "jucompiler.y"
+#line 198 "jucompiler.y"
                                                                           { (yyval.ast_tree) = ast_node("ParamDecl","",0,0);
                                                                             add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));
                                                                             add_childs((yyval.ast_tree),ast_node("Id",(yyvsp[-1].lex)->name,(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum));
@@ -1803,13 +1803,13 @@ yyreduce:
     break;
 
   case 25:
-#line 205 "jucompiler.y"
+#line 204 "jucompiler.y"
                                                                           {(yyval.ast_tree) = NULL;}
 #line 1809 "y.tab.c"
     break;
 
   case 26:
-#line 209 "jucompiler.y"
+#line 208 "jucompiler.y"
                                                                         {
     
                                                                 (yyval.ast_tree) = ast_node("VarDecl", "",0,0);
@@ -1823,7 +1823,7 @@ yyreduce:
     break;
 
   case 27:
-#line 220 "jucompiler.y"
+#line 219 "jucompiler.y"
                                                            { 
                                                                 (yyval.ast_tree) = ast_node("VarDecl","",0,0);
                                                                 add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-1].lex)->name,(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum));                                                              
@@ -1834,13 +1834,13 @@ yyreduce:
     break;
 
   case 28:
-#line 226 "jucompiler.y"
+#line 225 "jucompiler.y"
                                                             {(yyval.ast_tree) = NULL;}
 #line 1840 "y.tab.c"
     break;
 
   case 29:
-#line 229 "jucompiler.y"
+#line 228 "jucompiler.y"
                                                           {
                                                                 int count = 0;
                                                                 if((yyvsp[-2].ast_tree) != NULL){
@@ -1868,13 +1868,13 @@ yyreduce:
     break;
 
   case 30:
-#line 253 "jucompiler.y"
+#line 252 "jucompiler.y"
                                                                                              {(yyval.ast_tree) = NULL;}
 #line 1874 "y.tab.c"
     break;
 
   case 31:
-#line 256 "jucompiler.y"
+#line 255 "jucompiler.y"
                                                                             {
                                                                                (yyval.ast_tree) = ast_node("If","", (yyvsp[-4].lex)->line,(yyvsp[-4].lex)->collum);
                                                                                
@@ -1894,7 +1894,7 @@ yyreduce:
     break;
 
   case 32:
-#line 272 "jucompiler.y"
+#line 271 "jucompiler.y"
                                                                             {
                                                                                 (yyval.ast_tree) = ast_node("If","",(yyvsp[-6].lex)->line,(yyvsp[-6].lex)->collum);
                                                                                 add_childs((yyval.ast_tree),(yyvsp[-4].ast_tree));
@@ -1914,7 +1914,7 @@ yyreduce:
     break;
 
   case 33:
-#line 287 "jucompiler.y"
+#line 286 "jucompiler.y"
                                                                             {
                                                                              (yyval.ast_tree) = ast_node("While","",(yyvsp[-4].lex)->line,(yyvsp[-4].lex)->collum);
                                                                              add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));
@@ -1932,7 +1932,7 @@ yyreduce:
     break;
 
   case 34:
-#line 301 "jucompiler.y"
+#line 300 "jucompiler.y"
                                                                             {
                                                                                 (yyval.ast_tree) = ast_node("Assign","",(yyvsp[-2].lex)->line,(yyvsp[-2].lex)->collum);
                                                                                 add_childs((yyval.ast_tree),ast_node("Id",(yyvsp[-3].lex)->name,(yyvsp[-3].lex)->line,(yyvsp[-3].lex)->collum));
@@ -1942,13 +1942,13 @@ yyreduce:
     break;
 
   case 35:
-#line 307 "jucompiler.y"
+#line 306 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Return", "",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);}
 #line 1948 "y.tab.c"
     break;
 
   case 36:
-#line 309 "jucompiler.y"
+#line 308 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Return","",(yyvsp[-2].lex)->line,(yyvsp[-2].lex)->collum);
                                                                                     add_childs((yyval.ast_tree),(yyvsp[-1].ast_tree));
                                                                                     }
@@ -1956,7 +1956,7 @@ yyreduce:
     break;
 
   case 37:
-#line 313 "jucompiler.y"
+#line 312 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Print","",(yyvsp[-4].lex)->line,(yyvsp[-4].lex)->collum);
                                                                                     add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));
                                                                                     }
@@ -1964,7 +1964,7 @@ yyreduce:
     break;
 
   case 38:
-#line 317 "jucompiler.y"
+#line 316 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Print","",(yyvsp[-4].lex)->line,(yyvsp[-4].lex)->collum);
                                                                                     add_childs((yyval.ast_tree), ast_node("StrLit", (yyvsp[-2].lex)->name,(yyvsp[-2].lex)->line,(yyvsp[-2].lex)->collum));
                                                                                     }
@@ -1972,268 +1972,268 @@ yyreduce:
     break;
 
   case 39:
-#line 321 "jucompiler.y"
+#line 320 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[-1].ast_tree);}
 #line 1978 "y.tab.c"
     break;
 
   case 40:
-#line 324 "jucompiler.y"
+#line 323 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[-1].ast_tree);}
 #line 1984 "y.tab.c"
     break;
 
   case 41:
-#line 325 "jucompiler.y"
+#line 324 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Semicolon","",(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 1990 "y.tab.c"
     break;
 
   case 42:
-#line 326 "jucompiler.y"
+#line 325 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;flag_erro = 1;flag_erro2 = 1;}
 #line 1996 "y.tab.c"
     break;
 
   case 43:
-#line 329 "jucompiler.y"
+#line 328 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[-1].ast_tree); add_brother((yyval.ast_tree),(yyvsp[0].ast_tree));}
 #line 2002 "y.tab.c"
     break;
 
   case 44:
-#line 330 "jucompiler.y"
+#line 329 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;}
 #line 2008 "y.tab.c"
     break;
 
   case 45:
-#line 333 "jucompiler.y"
+#line 332 "jucompiler.y"
                                                                        {(yyval.ast_tree) = ast_node("Call", "",(yyvsp[-3].lex)->line, (yyvsp[-3].lex)->collum);
                                                                         add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-3].lex)->name,(yyvsp[-3].lex)->line,(yyvsp[-3].lex)->collum));add_childs((yyval.ast_tree), (yyvsp[-1].ast_tree));}
 #line 2015 "y.tab.c"
     break;
 
   case 46:
-#line 336 "jucompiler.y"
+#line 335 "jucompiler.y"
                                                                               {(yyval.ast_tree) = ast_node("Call", "",(yyvsp[-2].lex)->line, (yyvsp[-2].lex)->collum);
                                                                                 add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-2].lex)->name,(yyvsp[-2].lex)->line,(yyvsp[-2].lex)->collum));}
 #line 2022 "y.tab.c"
     break;
 
   case 47:
-#line 339 "jucompiler.y"
+#line 338 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;flag_erro = 1; flag_erro2 = 1;}
 #line 2028 "y.tab.c"
     break;
 
   case 48:
-#line 342 "jucompiler.y"
+#line 341 "jucompiler.y"
                                                              {(yyval.ast_tree) = (yyvsp[-1].ast_tree);add_brother((yyval.ast_tree),(yyvsp[0].ast_tree));}
 #line 2034 "y.tab.c"
     break;
 
   case 49:
-#line 345 "jucompiler.y"
+#line 344 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[-1].ast_tree);add_brother((yyval.ast_tree), (yyvsp[0].ast_tree));}
 #line 2040 "y.tab.c"
     break;
 
   case 50:
-#line 347 "jucompiler.y"
+#line 346 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;}
 #line 2046 "y.tab.c"
     break;
 
   case 51:
-#line 350 "jucompiler.y"
+#line 349 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("ParseArgs","",(yyvsp[-6].lex)->line,(yyvsp[-6].lex)->collum);
                                                                                     add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-4].lex)->name,(yyvsp[-4].lex)->line,(yyvsp[-4].lex)->collum));add_childs((yyval.ast_tree), (yyvsp[-2].ast_tree));}
 #line 2053 "y.tab.c"
     break;
 
   case 52:
-#line 353 "jucompiler.y"
+#line 352 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;flag_erro = 1; flag_erro2 = 1;}
 #line 2059 "y.tab.c"
     break;
 
   case 53:
-#line 357 "jucompiler.y"
+#line 356 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = (yyvsp[0].ast_tree);}
 #line 2065 "y.tab.c"
     break;
 
   case 54:
-#line 358 "jucompiler.y"
+#line 357 "jucompiler.y"
                                                                                               {(yyval.ast_tree) = ast_node("Assign","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum); add_childs((yyval.ast_tree), ast_node("Id", (yyvsp[-2].lex)->name,(yyvsp[-2].lex)->line,(yyvsp[-2].lex)->collum)); add_childs((yyval.ast_tree), (yyvsp[0].ast_tree));}
 #line 2071 "y.tab.c"
     break;
 
   case 55:
-#line 361 "jucompiler.y"
+#line 360 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Add","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2077 "y.tab.c"
     break;
 
   case 56:
-#line 362 "jucompiler.y"
+#line 361 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Sub","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2083 "y.tab.c"
     break;
 
   case 57:
-#line 363 "jucompiler.y"
+#line 362 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Mul","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2089 "y.tab.c"
     break;
 
   case 58:
-#line 364 "jucompiler.y"
+#line 363 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Div","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2095 "y.tab.c"
     break;
 
   case 59:
-#line 365 "jucompiler.y"
+#line 364 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Mod","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2101 "y.tab.c"
     break;
 
   case 60:
-#line 366 "jucompiler.y"
+#line 365 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Or","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2107 "y.tab.c"
     break;
 
   case 61:
-#line 367 "jucompiler.y"
+#line 366 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Xor","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2113 "y.tab.c"
     break;
 
   case 62:
-#line 368 "jucompiler.y"
+#line 367 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("And","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2119 "y.tab.c"
     break;
 
   case 63:
-#line 369 "jucompiler.y"
+#line 368 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Lshift","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2125 "y.tab.c"
     break;
 
   case 64:
-#line 370 "jucompiler.y"
+#line 369 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Rshift","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2131 "y.tab.c"
     break;
 
   case 65:
-#line 371 "jucompiler.y"
+#line 370 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Eq","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2137 "y.tab.c"
     break;
 
   case 66:
-#line 372 "jucompiler.y"
+#line 371 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Ne","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2143 "y.tab.c"
     break;
 
   case 67:
-#line 373 "jucompiler.y"
+#line 372 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Lt","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2149 "y.tab.c"
     break;
 
   case 68:
-#line 374 "jucompiler.y"
+#line 373 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Gt","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2155 "y.tab.c"
     break;
 
   case 69:
-#line 375 "jucompiler.y"
+#line 374 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Le","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2161 "y.tab.c"
     break;
 
   case 70:
-#line 376 "jucompiler.y"
+#line 375 "jucompiler.y"
                                                                                           {(yyval.ast_tree) = ast_node("Ge","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[-2].ast_tree));add_brother((yyvsp[-2].ast_tree),(yyvsp[0].ast_tree));}
 #line 2167 "y.tab.c"
     break;
 
   case 71:
-#line 377 "jucompiler.y"
+#line 376 "jucompiler.y"
                                                                                        {(yyval.ast_tree) = ast_node("Minus","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[0].ast_tree));}
 #line 2173 "y.tab.c"
     break;
 
   case 72:
-#line 378 "jucompiler.y"
+#line 377 "jucompiler.y"
                                                                                        {(yyval.ast_tree) = ast_node("Not","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[0].ast_tree));}
 #line 2179 "y.tab.c"
     break;
 
   case 73:
-#line 379 "jucompiler.y"
+#line 378 "jucompiler.y"
                                                                                        {(yyval.ast_tree) = ast_node("Plus","",(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum);add_childs((yyval.ast_tree),(yyvsp[0].ast_tree));}
 #line 2185 "y.tab.c"
     break;
 
   case 74:
-#line 380 "jucompiler.y"
+#line 379 "jucompiler.y"
                                                                                        {(yyval.ast_tree) = (yyvsp[-1].ast_tree);}
 #line 2191 "y.tab.c"
     break;
 
   case 75:
-#line 381 "jucompiler.y"
+#line 380 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Id",(yyvsp[0].lex)->name,(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 2197 "y.tab.c"
     break;
 
   case 76:
-#line 382 "jucompiler.y"
+#line 381 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("Length","",(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum); add_childs((yyval.ast_tree),ast_node("Id",(yyvsp[-1].lex)->name,(yyvsp[-1].lex)->line,(yyvsp[-1].lex)->collum));}
 #line 2203 "y.tab.c"
     break;
 
   case 77:
-#line 383 "jucompiler.y"
+#line 382 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("DecLit",(yyvsp[0].lex)->name,(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 2209 "y.tab.c"
     break;
 
   case 78:
-#line 384 "jucompiler.y"
+#line 383 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("RealLit",(yyvsp[0].lex)->name,(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 2215 "y.tab.c"
     break;
 
   case 79:
-#line 385 "jucompiler.y"
+#line 384 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = ast_node("BoolLit",(yyvsp[0].lex)->name,(yyvsp[0].lex)->line,(yyvsp[0].lex)->collum);}
 #line 2221 "y.tab.c"
     break;
 
   case 80:
-#line 386 "jucompiler.y"
+#line 385 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[0].ast_tree);}
 #line 2227 "y.tab.c"
     break;
 
   case 81:
-#line 387 "jucompiler.y"
+#line 386 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = (yyvsp[0].ast_tree);}
 #line 2233 "y.tab.c"
     break;
 
   case 82:
-#line 388 "jucompiler.y"
+#line 387 "jucompiler.y"
                                                                                     {(yyval.ast_tree) = NULL;flag_erro = 1; flag_erro2 = 1;}
 #line 2239 "y.tab.c"
     break;
@@ -2471,7 +2471,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 391 "jucompiler.y"
+#line 390 "jucompiler.y"
 
 
 

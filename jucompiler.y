@@ -11,7 +11,7 @@ André Magalhães de Carvalho Nº 2020237655
 #include "y.tab.h"
 #include "semantics.h"
 
-symtab_header* symtab;
+symbab_tab* symtab;
 
 struct ast_tree *raiz;
 struct ast_tree *aux;
@@ -78,7 +78,6 @@ struct info_lex *lex;
 %right NOT 
 %left LPAR RPAR
 %nonassoc ELSE
-
 
 
 %%

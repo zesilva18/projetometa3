@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <ctype.h>
 
-extern symtab_header *symtab;
+extern symbab_tab *symtab;
 
 void createClass(ast_tree *node)
 {
 
-	symtab = (symtab_header *)malloc(sizeof(symtab_header));
+	symtab = (symbab_tab *)malloc(sizeof(symbab_tab));
 
 	symtab->type = "Class";
 	symtab->name = node->value;
@@ -29,12 +29,12 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 	if (strcmp(name, "_") == 0)
 		printf("Line %d, col %d: Symbol _ is reserved\n", line, col);
 
-	//----------PRIMEIRO VERIFICAR SE O METODO JA EXISTE--------------
+	//----------PRIMEIRO VERIFICAR SE O METODO JA EXISTE
 
 	if (verifyMethod(name, paramTypes))
 	{
 
-		//---------- CRIA LINHA DO METODO NA TABELA DA CLASS----------------
+		//---------- CRIA LINHA DO METODO NA TABELA DA CLASS
 
 		symtab_line *class_line = (symtab_line *)malloc(sizeof(symtab_line));
 
@@ -74,16 +74,16 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 
 		//---------- CRIAR HEADER DA TABELA DO METODO----------
 
-		symtab_header *header = (symtab_header *)malloc(sizeof(symtab_header));
+		symbab_tab *tab = (symbab_tab *)malloc(sizeof(symbab_tab));
 
-		header->type = "Method";
-		header->name = name;
-		header->params = paramTypes;
-		header->son = method_line;
+		tab->type = "Method";
+		tab->name = name;
+		tab->params = paramTypes;
+		tab->son = method_line;
 
-		symtab_header *tmp_header = symtab->brother;
+		symbab_tab *tmp_header = symtab->brother;
 
-		symtab_header *saveTmp_header = symtab;
+		symbab_tab *saveTmp_header = symtab;
 
 		while (tmp_header != NULL)
 		{
@@ -92,7 +92,7 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 			tmp_header = tmp_header->brother;
 		}
 
-		saveTmp_header->brother = header;
+		saveTmp_header->brother = tab;
 
 		node->valid = true;
 
@@ -595,7 +595,7 @@ char *getReturnType(ast_tree *node)
 symtab_line *getMethodTable(int k)
 {
 
-	symtab_header *tmp = symtab;
+	symbab_tab *tmp = symtab;
 
 	int i;
 	for (i = 0; i < k; i++)
@@ -655,7 +655,7 @@ char *scat(char *s, char *t)
 void printTable()
 {
 
-	symtab_header *tmp = symtab;
+	symbab_tab *tmp = symtab;
 
 	while (tmp != NULL)
 	{
@@ -684,7 +684,7 @@ void printTable()
 			}
 			else
 			{
-				printf("%s\t(%s)\t%s\n", tmp_line->name, tmp_line->paramTypes, tmp_line->type);
+				printf("%s\t(%s)\t%s\n", tmp_line->name, tmp_line->paramTypes, tmp_linety->type);
 			}
 
 			tmp_line = tmp_line->brother;
