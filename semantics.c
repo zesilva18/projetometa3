@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int a = 0;
 
 void check_program(ast_tree *tree)
 {
