@@ -2504,7 +2504,7 @@ int main(int argc, char *argv[]){
             flag=2;
             yyparse();
             check_program(raiz);
-            printSymbolTable();
+            printTable();
             if(flag_erro == 0){
                 ast_print(raiz,0);
             }

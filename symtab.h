@@ -37,7 +37,6 @@ char* convertType(char* type);
 bool verifyGlobalVariable(char* name);
 bool verifyLocalVariable(char* name, symtab_line* line);
 bool verifyMethod(char* name, char* paramTypes);
-char* checkMethod(char* name, char* paramTypes);
 char* checkSymbol(ast_tree* node, symtab_line* method);
 void checkCall(ast_tree* node, symtab_line* method);
 void checkMethodParams(ast_tree* node, char* params_call);
@@ -45,7 +44,7 @@ char* getReturnType(ast_tree* node);
 symtab_line* getMethodTable(int k);
 char* checkNumber(char* number);
 char *scat(char *s,char *t);
-void printSymbolTable();
+void printTable();
 
 
 #endif
