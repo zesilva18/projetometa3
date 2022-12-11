@@ -18,10 +18,8 @@ struct ast_tree *aux;
 struct ast_tree *temp;
 
 int flag = 1;
-int error = 0;
 char *type;
 int n_sons;
-int yydebug = 1;
 int flag_erro = 0;
 int flag_erro2 = 0;
 
@@ -418,8 +416,8 @@ int main(int argc, char *argv[]){
         else if(strcmp(argv[1],"-s") == 0){
             flag=2;
             yyparse();
-            check_program(raiz);
-            printTable();
+            programCheck(raiz);
+            Table();
             if(flag_erro == 0){
                 ast_print(raiz,0);
             }
@@ -428,7 +426,7 @@ int main(int argc, char *argv[]){
             flag=2;
             yyparse();
             if(raiz != NULL){
-                check_program(raiz);
+                programCheck(raiz);
             }
             
         }

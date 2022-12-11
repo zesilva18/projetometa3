@@ -24,25 +24,29 @@ typedef struct tab{
 	
 }symbab_tab;
 
-void createClass(ast_tree* node);
-symtab_line* createMethodLineAndHeader(ast_tree* node);
-void createGlobalVariable(ast_tree* node);
-bool verifyMethod(char* name, char* paramTypes);
-char* checkSymbol(ast_tree* node, symtab_line* method);
-void checkCall(ast_tree* node, symtab_line* method);
-void checkMethodParams(ast_tree* node, char* params_call);
-char* getReturnType(ast_tree* node);
-symtab_line* getMethodTable(int k);
-char* checkNumber(char* number);
-char *scat(char *s,char *t);
-void addParametros(ast_tree* node, symtab_line* line);
-void addLocalVariable(ast_tree* node, symtab_line* line);
-char* getParamTypes(ast_tree* params);
-char* convertType(char* type);
-bool verifyGlobalVariable(char* name);
-bool verifyLocalVariable(char* name, symtab_line* line);
+void classCreate(ast_tree* node);
+symtab_line* generateLineAndHeaderMethod(ast_tree* node);
+bool confirmMethod(char* name, char* paramTypes);
 
-void printTable();
+char* inspectSymb(ast_tree* node, symtab_line* method);
+void inspectCall(ast_tree* node, symtab_line* method);
+void inspectParamsMethod(ast_tree* node, char* params_call);
+
+char* obtainTypeReturn(ast_tree* node);
+char* obtainTypeParam(ast_tree* params);
+symtab_line* obtainTableMethod(int k);
+
+char* verifyNum(char* number);
+char *scat(char *s,char *t);
+void putParam(ast_tree* node, symtab_line* line);
+char* changeType(char* type);
+
+void generateVariableG(ast_tree* node);
+void putVariableL(ast_tree* node, symtab_line* line);
+bool checkVariableG(char* name);
+bool checkVariableL(char* name, symtab_line* line);
+
+void Table();
 
 
 

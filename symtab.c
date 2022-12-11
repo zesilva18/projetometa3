@@ -7,7 +7,7 @@
 
 extern symbab_tab *symtab;
 
-void createClass(ast_tree *node)
+void classCreate(ast_tree *node)
 {
 
 	symtab = (symbab_tab *)malloc(sizeof(symbab_tab));
@@ -16,12 +16,12 @@ void createClass(ast_tree *node)
 	symtab->name = node->value;
 }
 
-symtab_line *createMethodLineAndHeader(ast_tree *node)
+symtab_line * generateLineAndHeaderMethod(ast_tree *node)
 {
 
 	char *name = node->son->son->brother->value;
-	char *paramTypes = getParamTypes(node->son->son->brother->brother);
-	char *type = convertType(node->son->son->type);
+	char *paramTypes = obtainTypeParam(node->son->son->brother->brother);
+	char *type = changeType(node->son->son->type);
 
 	int line = node->son->son->brother->line;
 	int col = node->son->son->brother->collum;
@@ -31,7 +31,7 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 
 	//----------PRIMEIRO VERIFICAR SE O METODO JA EXISTE
 
-	if (verifyMethod(name, paramTypes))
+	if (confirmMethod(name, paramTypes))
 	{
 
 		//---------- CRIA LINHA DO METODO NA TABELA DA CLASS
@@ -94,7 +94,7 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 
 		saveTmp_header->brother = tab;
 
-		node->valid = true;
+		node->valid = 1;
 
 		return method_line;
 	}
@@ -102,16 +102,170 @@ symtab_line *createMethodLineAndHeader(ast_tree *node)
 	{
 
 		printf("Line %d, col %d: Symbol %s(%s) already defined\n", line, col, name, paramTypes);
-		node->valid = false;
+		node->valid = 0;
 		return NULL;
 	}
 }
 
-void createGlobalVariable(ast_tree *node)
+void putParam(ast_tree *node, symtab_line *line)
+{
+
+	char *name;
+	char *type;
+	int savLine;
+	int col;
+
+	//adicionar parametros a um no 
+
+	ast_tree *tmp = node->son->son->brother->brother->son;
+
+	if (line == NULL)
+	{
+		line = (symtab_line *)malloc(sizeof(symtab_line));
+	}
+
+	symtab_line *saveTmp = line;
+
+	while (tmp != NULL)
+	{
+
+		name = tmp->son->brother->value;
+		type = changeType(tmp->son->type);
+		savLine = tmp->son->brother->line;
+		col = tmp->son->brother->collum;
+
+		if (strcmp(name, "_") == 0)
+		{
+			printf("Line %d, col %d: Symbol _ is reserved\n", savLine, col);
+		}
+		else
+		{
+			if (checkVariableL(name, line))
+			{
+				symtab_line *param_line = (symtab_line *)malloc(sizeof(symtab_line));
+
+				// Atribuir atributos a linha na tabela
+				param_line->name = name;
+				param_line->type = type;
+				param_line->param = "param";
+
+				saveTmp->brother = param_line;
+
+				saveTmp = param_line;
+			}
+			else
+			{
+
+				printf("Line %d, col %d: Symbol %s already defined\n", savLine, col, name);
+			}
+		}
+
+		tmp = tmp->brother;
+	}
+}
+
+void putVariableL(ast_tree *node, symtab_line *line)
 {
 
 	char *name = node->son->brother->value;
-	char *type = convertType(node->son->type);
+	char *type = changeType(node->son->type);
+	int savLine = node->son->brother->line;
+	int col = node->son->brother->collum;
+
+	if (strcmp(name, "_") == 0)
+	{
+		printf("Line %d, col %d: Symbol _ is reserved\n", savLine, col);
+		return;
+	}
+
+	if (checkVariableL(name, line))
+	{
+
+		symtab_line *param_line = (symtab_line *)malloc(sizeof(symtab_line));
+
+		// Atribuir atributos a linha na tabela
+		param_line->name = name;
+		param_line->type = type;
+
+		symtab_line *saveTmp = line;
+		symtab_line *tmp = line->brother;
+
+		while (tmp != NULL)
+		{
+
+			saveTmp = tmp;
+
+			tmp = tmp->brother;
+		}
+
+		saveTmp->brother = param_line;
+	}
+	else
+	{
+
+		printf("Line %d, col %d: Symbol %s already defined\n", savLine, col, name);
+	}
+}
+
+char *obtainTypeParam(ast_tree *params)
+{
+
+	char *string = "";
+	int count = 0;
+
+	ast_tree *tmp = params->son;
+
+	while (tmp != NULL)
+	{
+
+		if (count == 0)
+		{
+
+			string = scat(string, changeType(tmp->son->type));
+		}
+		else
+		{
+			string = scat(string, ",");
+			string = scat(string, changeType(tmp->son->type));
+		}
+
+		count++;
+		tmp = tmp->brother;
+	}
+
+	return string;
+}
+
+char *changeType(char *type) //funcao para converter o tipo 
+{
+
+	if (strcmp(type, "StringArray") == 0)
+	{
+		return "String[]";
+	}
+	else if (strcmp(type, "Bool") == 0)
+	{
+		return "boolean";
+	}
+	else
+	{
+		char *string = (char *)malloc(strlen(type) + 1);
+		char *tmp = type;
+		int count = 0;
+		for (; *tmp; ++tmp)
+		{
+			string[count] = tolower(*tmp); 
+			count++;
+		}
+		return string;
+	}
+}
+
+void generateVariableG(ast_tree *node)
+{
+
+	char *name = node->son->brother->value;
+	char *type = changeType(node->son->type);
 
 	int line = node->son->brother->line;
 	int col = node->son->brother->collum;
@@ -122,7 +276,7 @@ void createGlobalVariable(ast_tree *node)
 		return;
 	}
 
-	if (verifyGlobalVariable(name))  //verificar se a name e paramTypes existem
+	if (checkVariableG(name))  //verificar se a name e paramTypes existem
 	{
 
 		symtab_line *line = (symtab_line *)malloc(sizeof(symtab_line));
@@ -157,161 +311,7 @@ void createGlobalVariable(ast_tree *node)
 	}
 }
 
-void addParametros(ast_tree *node, symtab_line *line)
-{
-
-	char *name;
-	char *type;
-	int linesave;
-	int col;
-
-	//adicionar parametros a um no 
-
-	ast_tree *tmp = node->son->son->brother->brother->son;
-
-	if (line == NULL)
-	{
-		line = (symtab_line *)malloc(sizeof(symtab_line));
-	}
-
-	symtab_line *saveTmp = line;
-
-	while (tmp != NULL)
-	{
-
-		name = tmp->son->brother->value;
-		type = convertType(tmp->son->type);
-		linesave = tmp->son->brother->line;
-		col = tmp->son->brother->collum;
-
-		if (strcmp(name, "_") == 0)
-		{
-			printf("Line %d, col %d: Symbol _ is reserved\n", linesave, col);
-		}
-		else
-		{
-			if (verifyLocalVariable(name, line))
-			{
-				symtab_line *param_line = (symtab_line *)malloc(sizeof(symtab_line));
-
-				// Atribuir atributos a linha na tabela
-				param_line->name = name;
-				param_line->type = type;
-				param_line->param = "param";
-
-				saveTmp->brother = param_line;
-
-				saveTmp = param_line;
-			}
-			else
-			{
-
-				printf("Line %d, col %d: Symbol %s already defined\n", linesave, col, name);
-			}
-		}
-
-		tmp = tmp->brother;
-	}
-}
-
-void addLocalVariable(ast_tree *node, symtab_line *line)
-{
-
-	char *name = node->son->brother->value;
-	char *type = convertType(node->son->type);
-	int linesave = node->son->brother->line;
-	int col = node->son->brother->collum;
-
-	if (strcmp(name, "_") == 0)
-	{
-		printf("Line %d, col %d: Symbol _ is reserved\n", linesave, col);
-		return;
-	}
-
-	if (verifyLocalVariable(name, line))
-	{
-
-		symtab_line *param_line = (symtab_line *)malloc(sizeof(symtab_line));
-
-		// Atribuir atributos a linha na tabela
-		param_line->name = name;
-		param_line->type = type;
-
-		symtab_line *saveTmp = line;
-		symtab_line *tmp = line->brother;
-
-		while (tmp != NULL)
-		{
-
-			saveTmp = tmp;
-
-			tmp = tmp->brother;
-		}
-
-		saveTmp->brother = param_line;
-	}
-	else
-	{
-
-		printf("Line %d, col %d: Symbol %s already defined\n", linesave, col, name);
-	}
-}
-
-char *getParamTypes(ast_tree *params)
-{
-
-	char *string = "";
-	int i = 0;
-
-	ast_tree *tmp = params->son;
-
-	while (tmp != NULL)
-	{
-
-		if (i == 0)
-		{
-
-			string = scat(string, convertType(tmp->son->type));
-		}
-		else
-		{
-			string = scat(string, ",");
-			string = scat(string, convertType(tmp->son->type));
-		}
-
-		i++;
-		tmp = tmp->brother;
-	}
-
-	return string;
-}
-
-char *convertType(char *type) //funcao para converter o tipo 
-{
-
-	if (strcmp(type, "StringArray") == 0)
-	{
-		return "String[]";
-	}
-	else if (strcmp(type, "Bool") == 0)
-	{
-		return "boolean";
-	}
-	else
-	{
-		char *string = (char *)malloc(strlen(type) + 1);
-		char *tmp = type;
-		int i = 0;
-		for (; *tmp; ++tmp)
-		{
-			string[i] = tolower(*tmp); 
-			i++;
-		}
-		return string;
-	}
-}
-
-bool verifyGlobalVariable(char *name) //
+bool checkVariableG(char *name) //
 {
 
 	symtab_line *tmp = symtab->son;
@@ -321,16 +321,16 @@ bool verifyGlobalVariable(char *name) //
 
 		if (strcmp(tmp->name, name) == 0 && tmp->paramTypes == NULL)
 		{
-			return false;
+			return 0;
 		}
 
 		tmp = tmp->brother;
 	}
 
-	return true;
+	return 1;
 }
 
-bool verifyLocalVariable(char *name, symtab_line *line)
+bool checkVariableL(char *name, symtab_line *line)
 {
 
 	symtab_line *tmp = line->brother;
@@ -339,15 +339,15 @@ bool verifyLocalVariable(char *name, symtab_line *line)
 	{
 
 		if (strcmp(tmp->name, name) == 0)
-			return false;
+			return 0;
 
 		tmp = tmp->brother;
 	}
 
-	return true;
+	return 1;
 }
 
-bool verifyMethod(char *name, char *paramTypes)
+bool confirmMethod(char *name, char *paramTypes)
 {
 
 	symtab_line *tmp = symtab->son;
@@ -357,16 +357,16 @@ bool verifyMethod(char *name, char *paramTypes)
 
 		if (strcmp(tmp->name, name) == 0 && tmp->paramTypes != NULL && strcmp(tmp->paramTypes, paramTypes) == 0)
 		{
-			return false;
+			return 0;
 		}
 
 		tmp = tmp->brother;
 	}
 
-	return true;
+	return 1;
 }
 
-char *checkSymbol(ast_tree *node, symtab_line *method)
+char *inspectSymb(ast_tree *node, symtab_line *method)
 {
 
 	char *param = node->value;
@@ -407,19 +407,19 @@ char *checkSymbol(ast_tree *node, symtab_line *method)
 	return "undef";
 }
 
-void checkCall(ast_tree *node, symtab_line *method)
+void inspectCall(ast_tree *node, symtab_line *method)
 {
 
 	char *params = "";
 
 	ast_tree *tmp = node->son->brother;
 
-	int i = 0;
+	int count = 0;
 
 	while (tmp != NULL)
 	{
 
-		if (i == 0)
+		if (count == 0)
 		{
 			params = scat(params, tmp->type2);
 		}
@@ -429,15 +429,15 @@ void checkCall(ast_tree *node, symtab_line *method)
 			params = scat(params, tmp->type2);
 		}
 
-		i++;
+		count++;
 
 		tmp = tmp->brother;
 	}
 
-	checkMethodParams(node, params);
+	inspectParamsMethod(node, params);
 }
 
-void checkMethodParams(ast_tree *node, char *params_call)
+void inspectParamsMethod(ast_tree *node, char *params_call)
 {
 
 	char *name = node->son->value;
@@ -481,7 +481,7 @@ void checkMethodParams(ast_tree *node, char *params_call)
 			{
 
 				char *params = "";
-				int i = 0;
+				int count = 0;
 
 				char *tmp_call = (char *)malloc(strlen(params_call) + 1);
 				strcpy(tmp_call, params_call);
@@ -492,7 +492,7 @@ void checkMethodParams(ast_tree *node, char *params_call)
 				char *rest_call = tmp_call;
 				char *rest_method = tmp_method;
 
-				bool check = true;
+				bool vf = 1;
 
 				char *token_call = strtok_r(rest_call, ",", &rest_call);
 				char *token_method = strtok_r(rest_method, ",", &rest_method);
@@ -502,17 +502,17 @@ void checkMethodParams(ast_tree *node, char *params_call)
 
 					if (token_method == NULL)
 					{
-						check = false;
+						vf = 0;
 						break;
 					}
 
 					if (strcmp(token_call, token_method) != 0 && !(strcmp(token_method, "double") == 0 && strcmp(token_call, "int") == 0))
 					{
-						check = false;
+						vf = 0;
 						break;
 					}
 
-					if (i == 0)
+					if (count == 0)
 					{
 						params = scat(params, token_method);
 					}
@@ -522,13 +522,13 @@ void checkMethodParams(ast_tree *node, char *params_call)
 						params = scat(params, token_method);
 					}
 
-					i++;
+					count++;
 
 					token_call = strtok_r(rest_call, ",", &rest_call);
 					token_method = strtok_r(rest_method, ",", &rest_method);
 				}
 
-				if (check && token_method == NULL)
+				if (vf && token_method == NULL)
 				{
 
 					checkFunc++;
@@ -572,7 +572,7 @@ void checkMethodParams(ast_tree *node, char *params_call)
 	return;
 }
 
-char *getReturnType(ast_tree *node)
+char *obtainTypeReturn(ast_tree *node)
 {
 
 	// char* name = node->son->param;
@@ -592,16 +592,16 @@ char *getReturnType(ast_tree *node)
 	return "undef";
 }
 
-symtab_line *getMethodTable(int k)
+symtab_line *obtainTableMethod(int k)
 {
 
 	symbab_tab *tmp = symtab;
 
-	int i;
-	for (i = 0; i < k; i++)
+	int count;
+	for (count = 0; count < k; count++)
 	{
 		if (strcmp(tmp->type, "FieldDecl") == 0)
-			i--;
+			count--;
 
 		tmp = tmp->brother;
 	}
@@ -609,50 +609,50 @@ symtab_line *getMethodTable(int k)
 	return tmp->son;
 }
 
-char *checkNumber(char *number)
+char *verifyNum(char *number)
 {
 
 	char *tmp_number = (char *)malloc(strlen(number) + 1);
 	strcpy(tmp_number, number);
 
-	char *new_number = "";
+	char *numNew = "";
 
 	char *token = strtok(tmp_number, "_");
 
 	while (token != NULL)
 	{
 
-		new_number = scat(new_number, token);
+		numNew = scat(numNew, token);
 
 		token = strtok(NULL, "_");
 	}
 
-	return new_number;
+	return numNew;
 }
 
 char *scat(char *s, char *t)
 {
-	char *p = (char *)malloc(strlen(s) + strlen(t) + 1); /* 3: you will have to reserve memory to hold the copy. */
+	char *pont = (char *)malloc(strlen(s) + strlen(t) + 1); /* 3: you will have to reserve memory to hold the copy. */
 	int ptr = 0, temp = 0;								 /* 4 initialise some helpers */
 
 	while (s[temp] != '\0')
 	{ /* 5. use the temp to "walk" over string 1 */
-		p[ptr++] = s[temp++];
+		pont[ptr++] = s[temp++];
 	}
 	temp = 0;
 	while (t[temp] != '\0')
 	{ /* and string two */
-		p[ptr++] = t[temp++];
+		pont[ptr++] = t[temp++];
 	}
 	s = NULL;
 	free(s);
 
 	t = NULL;
 	free(t);
-	return p;
+	return pont;
 }
 
-void printTable()
+void Table()
 {
 
 	symbab_tab *tmp = symtab;

@@ -153,7 +153,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 47 "jucompiler.y"
+#line 45 "jucompiler.y"
 
 char* string;
 struct ast_tree* ast_tree;
