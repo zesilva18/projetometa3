@@ -32,7 +32,6 @@ char* inspectSymb(ast_tree* node, symtab_line* method);
 void inspectCall(ast_tree* node, symtab_line* method);
 void inspectParamsMethod(ast_tree* node, char* params_call);
 
-char* obtainTypeReturn(ast_tree* node);
 char* obtainTypeParam(ast_tree* params);
 symtab_line* obtainTableMethod(int k);
 

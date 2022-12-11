@@ -10,6 +10,7 @@ ast_tree *ast_node(char *type, char* value, int line, int collum) { //criar arvo
     node->collum = collum;
     node->father = NULL;
     node->brother = NULL;
+    node->son = NULL;
 
     return node;
 }
@@ -56,6 +57,7 @@ void ast_print(ast_tree* ast,int level)
     {
         for (int i = 0; i < level; i++)
             printf(".");
+            
         printf("%s", ast->type);
         if (strcmp(ast->value, "") != 0)
         {

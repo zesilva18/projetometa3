@@ -310,6 +310,10 @@ void methodRecursive(ast_tree *node, symtab_line *method, bool isCall)
 				{
 					printf("Line %d, col %d: Operator %s cannot be applied to types %s, %s\n", line, col, getToken(type), node->son->type2, node->son->brother->type2);
 				}
+				else if ((strcmp(node->son->type2, node->son->brother->type2) == 0) && (strcmp(node->son->type, "Id") == 0) && (strcmp(node->son->brother->type, "BoolLit") == 0) && (strcmp(node->type, "Eq") != 0) && (strcmp(node->type, "Ne") != 0))
+            {
+                printf("Line %d, col %d: Operator %s cannot be applied to types %s, %s\n", line, col, getToken(type), node->son->type2, node->son->brother->type2);
+            }
 			}
 		}
 		else

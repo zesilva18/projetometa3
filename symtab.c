@@ -572,26 +572,6 @@ void inspectParamsMethod(ast_tree *node, char *params_call)
 	return;
 }
 
-char *obtainTypeReturn(ast_tree *node)
-{
-
-	// char* name = node->son->param;
-	char *paramTypes = node->son->paramtype;
-
-	symtab_line *tmp = symtab->son;
-
-	while (tmp != NULL)
-	{
-
-		if (tmp->paramTypes != NULL && strcmp(tmp->paramTypes, paramTypes) == 0)
-			return tmp->type;
-
-		tmp = tmp->brother;
-	}
-
-	return "undef";
-}
-
 symtab_line *obtainTableMethod(int k)
 {
 
@@ -632,16 +612,16 @@ char *verifyNum(char *number)
 
 char *scat(char *s, char *t)
 {
-	char *pont = (char *)malloc(strlen(s) + strlen(t) + 1); /* 3: you will have to reserve memory to hold the copy. */
-	int ptr = 0, temp = 0;								 /* 4 initialise some helpers */
+	char *pont = (char *)malloc(strlen(s) + strlen(t) + 1); 
+	int ptr = 0, temp = 0;								 
 
 	while (s[temp] != '\0')
-	{ /* 5. use the temp to "walk" over string 1 */
+	{ 
 		pont[ptr++] = s[temp++];
 	}
 	temp = 0;
 	while (t[temp] != '\0')
-	{ /* and string two */
+	{ 
 		pont[ptr++] = t[temp++];
 	}
 	s = NULL;
